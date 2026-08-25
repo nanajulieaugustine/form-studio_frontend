@@ -1,26 +1,27 @@
 @import "tailwindcss";
 
+.pt-sans-regular {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --background: #2a2a2a;
+  --foreground: #F9F8F0;
+  --primary-color: #8B2D33;
+  --secondary-color: #FFBC5E;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --paragraph-text: "PT Sans", sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --paragraph-size: clamp(1rem, 0.821rem + 0.476vw, 1.25rem);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--paragraph-text);
+  font-family: var(--paragraph-text);
+  font-size: var(--paragraph-size);
 }
+
