@@ -7,3 +7,8 @@ export type HeaderItem = {
 };
 
 export type headerType = HeaderItem[];
+
+export type BurgerMenuType = {
+  isVisible: boolean;
+  toggleSideMenu: () => void;
+};
