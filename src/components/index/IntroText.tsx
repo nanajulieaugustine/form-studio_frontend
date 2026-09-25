@@ -60,7 +60,14 @@ const IntroText = () => {
                     form
                 </motion.span>
             </motion.h3>
-        <video src="/background-long-form.mp4" autoPlay muted className="w-screen h-screen blur-xl absolute -top-35 md:top-0 left-0 -z-100" loop></video>
+        <video
+            src="/background-long-form.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute left-0 top-0 -z-100 h-screen w-screen object-cover blur-xl"
+            />
         <p className="mt-30 max-w-[60ch] w-full mx-auto">Vi arbejder tæt sammen med vores kunder som en del af deres team og skaber en rød tråd på tværs af platforme og medier. Hos Form-Studio får du derfor én kreativ samarbejdspartner, der både kan udvikle idéen, producere indholdet og sikre, at brandet lever videre, så I slipper for at gentage jeres tanker og risikere at miste retning. <br/> <br/> Når vi har alfeveret jeres produkt, afsluttes vores samarbejde ikke. Vi drifter, dokumenterer, rapporterer og vedligeholder, så vi kan vækste jeres virksomhed og analysere hvad, der skaber resultater, for netop jer.</p>
         </article>
     );
