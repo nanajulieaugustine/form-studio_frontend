@@ -24,7 +24,7 @@ const Header = () => {
 
     return ( 
         <>
-        <div className="hidden md:block">
+        <div className="hidden md:block fixed top-0 left-0 z-50 w-full">
                 <nav className="flex justify-between items-end py-5 px-10 backdrop-blur-2xl">
                     
                     <Link href="/">

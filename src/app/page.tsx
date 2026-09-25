@@ -1,5 +1,13 @@
+import Hero from "@/components/index/Hero";
+import ShowServices from "@/components/index/ShowServices";
+import IntroText from "@/components/index/IntroText";
+
 export default function Home() {
   return (
-    <section></section>
+    <section>
+      <Hero/>
+      <ShowServices/>
+      <IntroText/>
+    </section>
   );
 }

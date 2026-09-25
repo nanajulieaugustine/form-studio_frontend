@@ -11,3 +11,9 @@ export type LineAnimationType = {
     isActive?: boolean
     color: string
 }
+
+export type IconTypes = {
+    children?: string
+    color: string
+    size: number
+}

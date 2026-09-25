@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Hiragino Kaku Gothic Std W8";
+  src: url("/fonts/hiragino-kaku-gothic-std-w8.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+}
+
 .pt-sans-regular {
   font-family: "PT Sans", sans-serif;
   font-weight: 400;
@@ -13,15 +20,81 @@
   --secondary-color: #FFBC5E;
 
   --paragraph-text: "PT Sans", sans-serif;
+  --heading-text: "Hiragino Kaku Gothic Std W8", sans-serif;
 
+  --display-size: clamp(5rem, 2rem + 15vi, 12rem);
+  --heading-1-size: clamp(2rem, 1rem + 6.6vi, 7.5rem);
+  --heading-2-size: clamp(3rem, 1.5rem + 4.8vi, 4.5rem);
+  --heading-3-size: clamp(2rem, 1rem + 3.2vi, 3rem);
+  --heading-4-size: clamp(1.25rem, 0.5rem + 2.4vi, 2rem);
   --paragraph-size: clamp(1rem, 0.821rem + 0.476vw, 1.25rem);
 }
 
 body {
+  text-wrap: pretty;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--paragraph-text);
   font-family: var(--paragraph-text);
   font-size: var(--paragraph-size);
+  word-break: hyphenate;
+  line-height:1.5;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-text);
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.display{
+  font-size: var(--display-size);
+  line-height: 1;
+  font-style: italic;
+}
+
+h1{
+  font-size: var(--heading-1-size);
+  line-height: 1;
+  font-style: italic;
+}
+
+h2{
+  font-size: var(--heading-2-size);
+  line-height: 1;
+  font-style: italic;
+}
+
+h3{
+  font-size: var(--heading-3-size);
+    line-height: 1;
+}
+
+h4{
+  font-size: var(--heading-4-size);
+    line-height: 1;
+}
+
+p{
+  max-width: 50ch;
+}
+
+.heading-1-size{
+  font-size: var(--heading-1-size);
+    line-height: 1;
+}
+
+.heading-2-size{
+  font-size: var(--heading-2-size);
+    line-height: 1;
+}
+
+.heading-3-size{
+  font-size: var(--heading-3-size);
+    line-height: 1;
+}
+
+.heading-4-size{
+  font-size: var(--heading-4-size);
+    line-height: 1;
+}

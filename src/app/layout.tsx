@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/navigation/Header";
+import Footer from "@/components/navigation/Footer";
 
 export const metadata: Metadata = {
   title: "Form-Studio",
@@ -14,11 +15,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <header>
           <Header/>
         </header>
-        <main>
+        <main className="px-10 mt-25">
         {children}
         </main>
         <footer>
-          
+          <Footer/>
         </footer>
         </body>
     </html>
