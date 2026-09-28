@@ -15,3 +15,7 @@ export type GetServicesProps = {
     activeProductId: number | null;
     onSelect: (id: number) => void;
 };
+
+export type ServiceViewProps = {
+    product: Product | null;
+};

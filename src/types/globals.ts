@@ -13,6 +13,7 @@ export type LineAnimationType = {
 }
 
 export type IconTypes = {
+    onClick?: () => void
     children?: string
     color: string
     size: number

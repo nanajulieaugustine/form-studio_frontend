@@ -1,9 +1,14 @@
 import { MdArrowRightAlt } from "react-icons/md";
 import { IconTypes } from "@/types/globals";
 
-const ArrowRight = ({ color, size }: IconTypes) => {
+const ArrowRight = ({ color, size, onClick }: IconTypes) => {
     return (
-        <MdArrowRightAlt size={size} color={color}/>
+        <MdArrowRightAlt
+            className={onClick ? "cursor-pointer" : undefined}
+            size={size}
+            color={color}
+            onClick={onClick}
+        />
     );
 };
  
