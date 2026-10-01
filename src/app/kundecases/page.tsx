@@ -1,6 +1,10 @@
+import CaseWrapper from "@/components/kundecases/CaseWrapper";
+
 const KundeCasesPage = () => {
     return ( 
-        <section></section>
+        <section>
+            <CaseWrapper/>
+        </section>
      );
 }
  

@@ -18,3 +18,15 @@ export type IconTypes = {
     color: string
     size: number
 }
+
+export type SelectOption = {
+  value: number | string;
+  label: string;
+};
+
+export type SelectFormProps = {
+  options: SelectOption[];
+  placeholder?: string;
+  value?: SelectOption | null;
+  onChange?: (option: SelectOption | null) => void;
+};
