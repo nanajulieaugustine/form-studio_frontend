@@ -12,7 +12,7 @@ const CaseCard = ({ selectedService }: CaseCardProps) => {
 
     const filteredCases = selectedServiceId ? cases.filter((item) => {
             const services = Array.isArray(item.service) ? item.service : item.service
-                    ? [item.service] : item.services ?? [];
+                    ? [item.service] : item.service ?? [];
 
             return services.some((service) => String(service.id) === selectedServiceId);
         }) : cases;
@@ -22,7 +22,7 @@ const CaseCard = ({ selectedService }: CaseCardProps) => {
             <div className="flex items-center justify-center h-100">
                     <div>
                         <h4>Der er desværre ingen cases på din valgte kategori i øjeblikket...</h4>
-                        <p>Er du interesseret i at høre mere om denne case?</p>
+                        <p>Er du interesseret i at høre mere om denne service?</p>
                         {/* TODO: indsæt kontakt os form her*/}
                     </div>
                 </div>
