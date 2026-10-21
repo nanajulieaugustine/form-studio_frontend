@@ -1,3 +1,5 @@
+import type { Employee } from "@/types/employees";
+
 export type CaseService = {
   id: string;
   name: string;
@@ -14,6 +16,7 @@ export type Case = {
   categories: Categories[];
   service_fk?: string | string[];
   thumbnail?: string;
+  employees?: Employee[];
 };
 
 export type CaseCardProps = {
@@ -24,6 +27,7 @@ export type Categories = {
   id: string;
   name: string;
   description?: string;
+  image?: string;
   description_id?: string;
   undercategory_id?: string;
 };

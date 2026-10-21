@@ -1,29 +1,33 @@
+
 "use client";
 
 import Image from "next/image";
+import { motion, useTransform } from "framer-motion";
 import { CaseDescriptionViewProps } from "@/types/categories";
 
-const CaseDescriptionView = ({
-    category,
-}: CaseDescriptionViewProps) => {
+const CaseDescriptionView = ({image, imageAlt, scrollProgress, activeItemIndex, itemCount,}: CaseDescriptionViewProps) => {
 
-    if (!category) {
+    const imageY = useTransform(scrollProgress, [activeItemIndex / itemCount, (activeItemIndex + 1) / itemCount], ["0", "-100%"]);
+
+    if (!image) {
         return null;
     }
 
     return (
-        <article className="flex flex-col">
+        <article className="relative h-full w-full overflow-hidden">
 
-            {category.image && (
-                <div className="relative aspect-4/3 w-full">
-                    <Image
-                        src={category.image}
-                        alt={category.name}
-                        fill
-                        className="object-cover"
-                    />
-                </div>
-            )}
+            <motion.div
+                key={image}
+                className="absolute aspect-4/2.25 inset-0"
+                style={{ y: imageY }}
+            >
+                <Image
+                    src={image}
+                    alt={imageAlt}
+                    fill
+                    className="object-cover"
+                />
+            </motion.div>
 
         </article>
     );

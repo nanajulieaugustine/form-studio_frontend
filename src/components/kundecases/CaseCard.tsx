@@ -11,8 +11,8 @@ const CaseCard = ({ selectedService }: CaseCardProps) => {
     const selectedServiceId = selectedService !== null && selectedService !== undefined ? String(selectedService) : null;
 
     const filteredCases = selectedServiceId ? cases.filter((item) => {
-            const services = Array.isArray(item.service) ? item.service : item.service
-                    ? [item.service] : item.service ?? [];
+            
+        const services = Array.isArray(item.service) ? item.service : item.service ? [item.service] : item.service ?? [];
 
             return services.some((service) => String(service.id) === selectedServiceId);
         }) : cases;
@@ -32,21 +32,12 @@ const CaseCard = ({ selectedService }: CaseCardProps) => {
     return (
         <ul className="relative flex flex-col">
             {filteredCases.map((item, index) => {
-                const serviceNames = Array.isArray(item.service)
-                    ? item.service.map((service) => service.name)
-                    : item.service
-                        ? [item.service.name]
-                        : item.services?.map((service) => service.name) ?? [];
+                const serviceNames = Array.isArray(item.service) ? item.service.map((service) => service.name) : item.service ? [item.service.name] : item.services?.map((service) => service.name) ?? [];
 
                 const imageSrc = item.thumbnail ?? "";
 
                 return (
-                    <li
-                        key={item.id}
-                        className={`relative w-fit ${
-                            index % 2 === 0 ? "self-start" : "self-end"
-                        }`}
-                    >
+                    <li key={item.id} className={`relative w-fit ${index % 2 === 0 ? "self-start" : "self-end"}`}>
                         <div className="relative h-100 w-170 overflow-hidden">
                             {imageSrc ? (
                                 <Image
@@ -62,27 +53,18 @@ const CaseCard = ({ selectedService }: CaseCardProps) => {
                             <div className="absolute inset-0 bg-black/30" />
                         </div>
 
-                        <h2 className="absolute bottom-10 left-0 z-10 text-white">
-                            {item.name}
-                        </h2>
+                        <h2 className="absolute bottom-10 left-0 z-10 text-white">{item.name}</h2>
 
                         <div className="flex items-baseline gap-5">
                             {serviceNames.map((serviceName) => (
-                                <h4 key={`${item.id}-${serviceName}`}>
-                                    {serviceName}
-                                </h4>
+                                <h4 key={`${item.id}-${serviceName}`}>{serviceName}</h4>
                             ))}
 
                             <div className="group flex items-center gap-2">
-                                <Link href={`/kundecases/${item.id}`}>
-                                    Se kundecase
-                                </Link>
+                                <Link href={`/kundecases/${item.id}`}>Se kundecase </Link>
 
                                 <span className="inline-flex transition-transform duration-300 ease-out group-hover:translate-x-0.5">
-                                    <ArrowRight
-                                        size={25}
-                                        color="var(--foreground)"
-                                    />
+                                    <ArrowRight size={25} color="var(--foreground)"/>
                                 </span>
                             </div>
                         </div>

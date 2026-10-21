@@ -1,9 +1,8 @@
 
-import ArrowRight from "../icons/arrowRight";
+import { MdArrowRightAlt } from "react-icons/md";
 import { PointerEventsProps } from "@/types/slides";
 
-
-const PointerEvents = ({slides, currentSlide, setCurrentSlide,}: PointerEventsProps) => {
+const PointerEvents = <T extends { id: string | number }>({slides, currentSlide, setCurrentSlide,}: PointerEventsProps<T>) => {
 
     const totalSlides = slides.length;
 
@@ -18,25 +17,20 @@ const PointerEvents = ({slides, currentSlide, setCurrentSlide,}: PointerEventsPr
     };
 
     return (
-        <div className="flex gap-5">
-            <div className="rotate-180">
-                <ArrowRight
-                    onClick={previousSlide}
-                    size={30}
-                    color="foreground"
-                />
-            </div>
+        <nav className="flex items-center gap-5" aria-label="Karruselkontroller">
+            <button type="button" onClick={previousSlide} aria-label="Forrige element">
+                <MdArrowRightAlt className="rotate-180" size={30} aria-hidden="true" />
+            </button>
 
-            <span>
-                {currentSlide + 1}/{totalSlides}
+            <span aria-live="polite" aria-atomic="true">
+                {currentSlide + 1} af {totalSlides}
             </span>
-            <ArrowRight
-                onClick={nextSlide}
-                size={30}
-                color="foreground"
-            />
 
-        </div>
+            <button type="button" onClick={nextSlide} aria-label="Næste element">
+                <MdArrowRightAlt size={30} aria-hidden="true" />
+            </button>
+
+        </nav>
     );
 };
 

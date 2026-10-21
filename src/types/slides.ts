@@ -1,4 +1,4 @@
-import { ServiceUndercategory } from "./products";
+import { Employee } from './employees';
 
 export type Slide = {
     id: number;
@@ -8,8 +8,12 @@ export type Slide = {
     videoUrl?: string;
 };
 
-export type PointerEventsProps = {
-    slides: ServiceUndercategory[];
+export type PointerEventsProps<T extends { id: string | number }> = {
+    slides: T[];
     currentSlide: number;
     setCurrentSlide: (slide: number) => void;
+};
+
+export type EmployeeKarruselProps = {
+    employees?: Employee[];
 };
