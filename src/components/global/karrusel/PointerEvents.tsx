@@ -18,7 +18,7 @@ const PointerEvents = <T extends { id: string | number }>({slides, currentSlide,
 
     return (
         <nav className="flex items-center gap-5" aria-label="Karruselkontroller">
-            <button type="button" onClick={previousSlide} aria-label="Forrige element">
+            <button type="button" className="inline-flex transition-transform duration-300 ease-out hover:-translate-x-0.5 cursor-pointer" onClick={previousSlide} aria-label="Forrige element">
                 <MdArrowRightAlt className="rotate-180" size={30} aria-hidden="true" />
             </button>
 
@@ -26,7 +26,7 @@ const PointerEvents = <T extends { id: string | number }>({slides, currentSlide,
                 {currentSlide + 1} af {totalSlides}
             </span>
 
-            <button type="button" onClick={nextSlide} aria-label="Næste element">
+            <button type="button" className="inline-flex transition-transform duration-300 ease-out hover:translate-x-0.5 cursor-pointer" onClick={nextSlide} aria-label="Næste element">
                 <MdArrowRightAlt size={30} aria-hidden="true" />
             </button>
 

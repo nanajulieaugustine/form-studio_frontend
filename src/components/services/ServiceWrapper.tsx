@@ -1,42 +1,27 @@
 "use client";
+
 import GetServices from "../global/getServices";
-import { useState, useEffect} from "react";
 import ServiceView from "./ServiceView";
-import { useServices } from "@/utils/productUtils";
+import { useScrollToService } from "@/utils/useScrollToService";
 
 const ServiceWrapper = () => {
-    const { products, loading } = useServices();
+    const {sectionRef, handleSelect, products, activeProductId, activeProduct, loading,} = useScrollToService();
 
-    const [activeProductId, setActiveProductId] = useState<number | null>(null);
-    const activeProduct = products.find(
-        (product) => product.id === activeProductId
-    ) ?? null;
+    if (loading) {
+        return <p>Henter services...</p>;
+    }
 
-        useEffect(() => {
-            if (products.length > 0 && activeProductId === null) {
-                setActiveProductId(products[0].id);
-            }
-        }, [products, activeProductId]);
-    
-   const handleSelect = (id: number) => {
-        const index = products.findIndex(
-            (product) => product.id === id
-        );
+    return (
+        <article
+            ref={sectionRef}
+            className="relative"
+            style={{height: `${products.length * 100}vh`,}}>
+            <div className="sticky top-5 md:top-30 h-screen">
+                <div className="relative flex h-full flex-col gap-10 md:flex-row md:gap-0">
 
-        if (index === -1) return;
-
-        setActiveProductId(id);
-
-    };
-
-    return ( 
-        <article className="relative flex md:min-h-[calc(100vh-8.75rem)] flex-1 flex-col">
-            <div className="relative flex flex-col gap-10 md:flex-row flex-1 justify-between">
-
-            <div className="relative isolate flex flex-col md:fixed md:bottom-0 md:left-10 md:top-35 md:w-[calc(55%-2.5rem)] md:overflow-y-auto">
-             <div
-                        aria-hidden="true"
-                        className="hidden md:block pointer-events-none absolute inset-0 z-0 md:fixed md:inset-y-0 md:left-0 md:right-auto md:w-[calc(55%-2.5rem)]"
+                    {/* Baggrund på venstre side */}
+                    <div aria-hidden="true"
+                        className="pointer-events-none absolute inset-0 z-0 hidden md:block md:fixed md:inset-y-0 md:left-0 md:right-auto md:w-[calc(50%-1px)]"
                         style={{
                             background: `
                                 linear-gradient(
@@ -47,25 +32,26 @@ const ServiceWrapper = () => {
                             `,
                         }}
                     />
-             <div className="relative z-10">
-             <GetServices
-                            activeProductId={activeProductId}
-                            onSelect={handleSelect}
-                        />
-             </div>
-            </div>
 
-            <div
-                aria-hidden="true"
-                className="pointer-events-none w-full border-t border-(--foreground) md:absolute md:inset-y-0 md:left-1/2 md:w-0 md:border-t-0 md:border-l"
-            />
+                    {/* Serviceliste */}
+                    <div className="relative z-10 min-w-0 md:w-1/2 md:shrink-0">
+                        <GetServices activeProductId={activeProductId} onSelect={handleSelect}/>
+                    </div>
 
-            <div className=" md:ml-[55%] md:h-[calc(100vh-8.75rem)] md:w-1/2 md:overflow-y-auto md:overscroll-contain">
-                <ServiceView product={activeProduct} />
-            </div>
+                    {/* Vertikal skillelinje */}
+                    <div aria-hidden="true" className="pointer-events-none hidden md:block absolute inset-y-0 left-1/2 z-20 border-l border-(--foreground)"/>
+
+                   {/* ServiceView: følger sidens scroll */}
+                    <div className="relative min-w-0 flex-1 md:absolute md:inset-y-0 md:left-[calc(50%+50px)] md:right-0">
+                        <div className="h-120 w-full md:h-full">
+                            <ServiceView product={activeProduct} />
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </article>
-     );
-}
- 
+    );
+};
+
 export default ServiceWrapper;

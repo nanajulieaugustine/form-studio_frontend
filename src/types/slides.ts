@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Employee } from './employees';
 
 export type Slide = {
@@ -16,4 +17,12 @@ export type PointerEventsProps<T extends { id: string | number }> = {
 
 export type EmployeeKarruselProps = {
     employees?: Employee[];
+};
+
+export type AnimatedCarouselProps<T> = {
+    slides: T[];
+    currentSlide: number;
+    renderSlide: (slide: T, index: number) => ReactNode;
+    className?: string;
+    duration?: number;
 };
