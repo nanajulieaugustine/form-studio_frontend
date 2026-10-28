@@ -25,7 +25,7 @@ const ShowServices = () => {
                     </div>
 
                     <div>
-                        <div className="relative h-120 w-80 overflow-hidden">
+                        <div className="relative h-120 w-100 overflow-hidden">
                            <ImageAnimationYAxis
                             items={products.map((product) => ({
                                 image: product.thumbnail_video || null,

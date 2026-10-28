@@ -33,12 +33,16 @@ const AnimatedImage = ({item, index, itemCount, scrollProgress,}: AnimatedImageP
 
     return (
         <motion.div className="absolute inset-0" style={{y, opacity, scale}}>
-            <Image
-                src={item.image}
-                alt={item.imageAlt}
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover"/>
+        <div className="flex items-center justify-center w-full h-full">
+        <Image
+            src={item.image}
+            alt="Beskrivelse"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-full object-contain"
+        />
+        </div>
         </motion.div>
     );
 };

@@ -38,21 +38,23 @@ const CaseCard = ({ selectedService }: CaseCardProps) => {
 
                 return (
                     <li key={item.id} className={`relative w-fit ${index % 2 === 0 ? "self-start" : "self-end"}`}>
-                        <div className="relative h-100 w-170 overflow-hidden">
-                            {imageSrc ? (
-                                <Image
-                                    src={imageSrc}
-                                    alt={item.name}
-                                    fill
-                                    className="object-cover"
-                                />
-                            ) : (
-                                <div className="h-full w-full bg-gray-200" />
-                            )}
 
-                            <div className="absolute inset-0 bg-black/30" />
-                        </div>
+                    <div className="relative w-fit">
+                        {imageSrc ? (
+                            <Image
+                                src={imageSrc}
+                                alt={item.name}
+                                width={0}
+                                height={0}
+                                sizes="100vw"
+                                className="block w-auto h-auto max-w-full"
+                            />
+                        ) : (
+                            <div className="w-64 aspect-square bg-gray-200" />
+                        )}
 
+                        <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+                    </div>
                         <h2 className="absolute bottom-10 left-0 z-10 text-white">{item.name}</h2>
 
                         <div className="flex items-baseline gap-5">
