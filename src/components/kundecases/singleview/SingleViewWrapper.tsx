@@ -4,13 +4,19 @@ import ImageAnimationYAxis from "@/components/global/animations/ImageAnimationYA
 import Image from "next/image";
 import EmployeeKarrusel from "@/components/global/karrusel/EmployeeKarrusel";
 import { useScrollToCase } from "@/hooks/useScrollToCase";
+import type { ImageItem } from "@/types/animations";
 
 const CaseSingleViewWrapper = () => {
-    const {sectionRef, caseItem, categories, itemCount, activeImage, activeImageAlt, scrollProgress, activeItemIndex, imageItemCount, isProblemStatementActive, activeCategoryId, handleSelectProblemStatement, handleSelect,} = useScrollToCase();
+    const {sectionRef, caseItem, categories, itemCount, scrollProgress, isProblemStatementActive, activeCategoryId, handleSelectProblemStatement, handleSelect,} = useScrollToCase();
 
     if (!caseItem) {
         return <article>Indlæser case...</article>;
     }
+
+    const imageItems: ImageItem[] = [
+        ...(caseItem.problem_statement ? [{ image: caseItem.thumbnail ?? null, imageAlt: caseItem.name }] : []),
+        ...categories.map((category) => ({image: category.image ?? null, imageAlt: category.name,})),
+    ];
 
     return (
         <>
@@ -34,11 +40,8 @@ const CaseSingleViewWrapper = () => {
                     )}
                     <div className="order-1 hidden h-auto w-full shrink-0 overflow-hidden md:order-2 md:block md:h-full md:w-1/2">
                         <ImageAnimationYAxis
-                            image={activeImage}
-                            imageAlt={activeImageAlt}
+                            items={imageItems}
                             scrollProgress={scrollProgress}
-                            activeItemIndex={activeItemIndex}
-                            itemCount={imageItemCount}
                         />
                     </div>
                 </div>
@@ -53,7 +56,7 @@ const CaseSingleViewWrapper = () => {
             </article>
         )}
         <article className="ml-auto flex w-full max-w-2xl py-20 flex-col items-start gap-5 ">
-            <h4>Udviklet af</h4>
+            <h4 className="self-end text-right">Udviklet af</h4>
             <EmployeeKarrusel employees={caseItem.employees} />
         </article>
         </>

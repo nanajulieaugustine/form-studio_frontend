@@ -35,14 +35,10 @@ const ShowServices = () => {
                         </div>
 
                         <div className="group flex items-center gap-2">
-                            <Link href="/services">
-                                læs mere om {activeProduct?.name}
-                            </Link>
+                            <Link href="/services">læs mere om {activeProduct?.name}</Link>
 
                             <span className="inline-flex transition-transform duration-300 ease-out group-hover:translate-x-0.5">
-                                <ArrowRight
-                                    size={25}
-                                    color="var(--foreground)"/>
+                                <ArrowRight size={25} color="var(--foreground)"/>
                             </span>
                         </div>
                     </div>

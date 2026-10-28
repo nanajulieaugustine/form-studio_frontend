@@ -1,7 +1,7 @@
 export type ButtonType = {
     children: string
     type: "primary" | "secondary"
-    use: "onClick" | "submit" | "href"
+  use?: "onClick" | "submit" | "href"
     href?: string
     onClick?: () => void
 }

@@ -22,16 +22,7 @@ const ServiceWrapper = () => {
                     {/* Baggrund på venstre side */}
                     <div aria-hidden="true"
                         className="pointer-events-none absolute inset-0 z-0 hidden md:block md:fixed md:inset-y-0 md:left-0 md:right-auto md:w-[calc(50%-1px)]"
-                        style={{
-                            background: `
-                                linear-gradient(
-                                    to right,
-                                    var(--primary-color) 0%,
-                                    var(--background) 100%
-                                )
-                            `,
-                        }}
-                    />
+                        style={{ background: `linear-gradient(to right, var(--primary-color) 0%, var(--background) 100%) `,}}/>
 
                     {/* Serviceliste */}
                     <div className="relative z-10 min-w-0 md:w-1/2 md:shrink-0">

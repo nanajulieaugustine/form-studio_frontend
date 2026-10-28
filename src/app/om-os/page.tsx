@@ -1,6 +1,9 @@
+import OmWrapper from "@/components/om/OmWrapper";
 const OmOsPage = () => {
     return ( 
-        <section></section>
+        <section>
+            <OmWrapper/>
+        </section>
      );
 }
  

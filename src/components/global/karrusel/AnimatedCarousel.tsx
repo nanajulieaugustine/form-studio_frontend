@@ -36,15 +36,10 @@ const AnimatedCarousel = <T,>({slides, currentSlide, renderSlide, className = ""
     };
 
     return (
-        <div
-            className={`relative min-w-0 overflow-hidden ${className}`}
-            aria-live="polite"
-            aria-atomic="true">
+        <div className={`relative min-w-0 overflow-hidden ${className}`} aria-live="polite"  aria-atomic="true">
         <motion.div
             className="flex w-full"
-            animate={{
-                x: `${-currentSlide * 100}%`,
-            }}
+            animate={{ x: `${-currentSlide * 100}%`,}}
             transition={transition}>
             {slides.map((slide, index) => (
                 <motion.div

@@ -12,7 +12,7 @@ export function useEmployees() {
 
     const getEmployees = useCallback(async (): Promise<Employee[] | null> => {
         try {
-            const response = await fetch(`${baseUrl}/employees`, {
+            const response = await fetch(`${baseUrl}/employee`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

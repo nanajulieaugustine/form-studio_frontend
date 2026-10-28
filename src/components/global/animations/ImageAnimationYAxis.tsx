@@ -1,97 +1,50 @@
 "use client";
 
 import Image from "next/image";
-import {
-    motion,
-    useTransform,
-    type MotionValue,
-} from "framer-motion";
+import { easeInOut, motion, useTransform,} from "framer-motion";
+import { AnimatedImageProps, ImageAnimationYAxisProps } from "@/types/animations";
 
-type ImageItem = {
-    image: string | null;
-    imageAlt: string;
-};
-
-type AnimatedImageProps = {
-    item: ImageItem;
-    index: number;
-    itemCount: number;
-    scrollProgress: MotionValue<number>;
-};
-
-type ImageAnimationYAxisProps = {
-    items: ImageItem[];
-    scrollProgress: MotionValue<number>;
-};
 
 const IMAGE_HEIGHT = 100;
 const IMAGE_GAP = 50;
 const IMAGE_STEP = IMAGE_HEIGHT + IMAGE_GAP;
 
-const AnimatedImage = ({
-    item,
-    index,
-    itemCount,
-    scrollProgress,
-}: AnimatedImageProps) => {
-    const start = Math.max(
-        0,
-        (index * IMAGE_STEP - IMAGE_HEIGHT) /
-            (itemCount * IMAGE_HEIGHT)
-    );
+const AnimatedImage = ({item, index, itemCount, scrollProgress,}: AnimatedImageProps) => {
 
-    const center =
-        (index * IMAGE_STEP) /
-        (itemCount * IMAGE_HEIGHT);
+    // udregning af animation via. index
+    const lastIndex = itemCount - 1;
 
-    const end = Math.min(
-        1,
-        (index * IMAGE_STEP + IMAGE_HEIGHT) /
-            (itemCount * IMAGE_HEIGHT)
-    );
+    const totalTravel = Math.max(lastIndex * IMAGE_STEP, IMAGE_HEIGHT);
 
-    const y = useTransform(
-        scrollProgress,
-        [0, 1],
-        [
-            `${index * IMAGE_STEP}%`,
-            `${index * IMAGE_STEP - itemCount * IMAGE_HEIGHT}%`,
-        ]
-    );
+    const center = (index * IMAGE_STEP) / totalTravel;
 
-    const opacity = useTransform(
-        scrollProgress,
-        index === 0
-            ? [0, 1 / itemCount]
-            : [start, center, end],
-        index === 0 ? [1, 0] : [0, 1, 0]
-    );
+    const start = Math.max(0, (index * IMAGE_STEP - IMAGE_HEIGHT) / totalTravel);
+
+    const end = Math.min(1, (index * IMAGE_STEP + IMAGE_HEIGHT) / totalTravel);
+
+    const y = useTransform( scrollProgress, [0, 1],[`${index * IMAGE_STEP}%`, `${index * IMAGE_STEP - lastIndex * IMAGE_STEP}%`]);
+
+    // animation værdier
+    const opacity = useTransform( scrollProgress, itemCount === 1 ? [0, 1] : index === 0? [0, end] : index === lastIndex ? [start, 1] : [start, center, end], itemCount === 1 ? [1, 1] : index === 0 ? [1, 0] : index === lastIndex ? [0, 1] : [0, 1, 0]);
+
+    const scale = useTransform( scrollProgress, itemCount === 1 ? [0, 1] : index === 0 ? [0, end] : index === lastIndex ? [start, 1]: [start, center, end], itemCount === 1 ? [1, 1] : index === 0 ? [1, 0.75]  : index === lastIndex ? [0.75, 1] : [0.75, 1, 0.75], { ease: easeInOut });
 
     if (!item.image) return null;
 
     return (
-        <motion.div
-            className="absolute inset-0"
-            style={{
-                y,
-                opacity,
-            }}
-        >
+        <motion.div className="absolute inset-0" style={{y, opacity, scale}}>
             <Image
                 src={item.image}
                 alt={item.imageAlt}
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover"
-            />
+                className="object-cover"/>
         </motion.div>
     );
 };
 
-const ImageAnimationYAxis = ({
-    items,
-    scrollProgress,
-}: ImageAnimationYAxisProps) => {
+const ImageAnimationYAxis = ({items, scrollProgress,}: ImageAnimationYAxisProps) => {
+    
     if (items.length === 0) return null;
 
     return (
@@ -102,8 +55,7 @@ const ImageAnimationYAxis = ({
                     item={item}
                     index={index}
                     itemCount={items.length}
-                    scrollProgress={scrollProgress}
-                />
+                    scrollProgress={scrollProgress}/>
             ))}
         </article>
     );
